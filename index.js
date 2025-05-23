@@ -33,7 +33,7 @@ class ImageResizerApp {
 
     //   Process images one by one
       for (const obj of imageObjects) {
-        if(key.includes('backup/')) {
+        if(obj.Key.includes('backup/')) {
           console.log(`Skipping backup image: ${obj.Key}`);
           continue;
         }
