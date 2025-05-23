@@ -33,10 +33,10 @@ class ImageResizerApp {
 
     //   Process images one by one
       for (const obj of imageObjects) {
-        if(obj.Key.includes('backup/')) {
-          console.log(`Skipping backup image: ${obj.Key}`);
-          continue;
-        }
+        // if(obj.Key.includes('backup/')) {
+        //   console.log(`Skipping backup image: ${obj.Key}`);
+        //   continue;
+        // }
         await this.processImage(obj.Key);
         
         // Add a small delay to avoid overwhelming S3
@@ -72,13 +72,13 @@ class ImageResizerApp {
       const contentType = this.imageProcessor.getContentType(resizeResult.originalFormat);
 
       // backup the original image into a different folder
-      const backupKey = key.replace(this.s3Client.directoryPrefix, `${this.s3Client.directoryPrefix}backup/`);
+      const backupKey = 'backup/' + key;
       await this.s3Client.uploadObject(backupKey, imageBuffer, metadata.ContentType);
       
-
+      const newKey = key.replace('backup/', '');
       // Upload the resized image back to the same location
-      await this.s3Client.uploadObject(key, resizeResult.buffer, contentType);
-      
+      await this.s3Client.uploadObject(newKey, resizeResult.buffer, contentType);
+
       this.processedCount++;
     //   this.totalSavings += (resizeResult.originalSize - resizeResult.newSize);
       

@@ -2,7 +2,7 @@ const sharp = require('sharp');
 
 class ImageProcessor {
   constructor() {
-    this.width = parseInt(process.env.RESIZE_WIDTH) || 1024;
+    this.width = parseInt(process.env.RESIZE_WIDTH) || 1366;
     // Setting height to null to maintain aspect ratio
     this.height = null;
   }
