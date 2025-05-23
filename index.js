@@ -136,7 +136,7 @@ async function main() {
   const app = new ImageResizerApp();
   
   const args = process.argv.slice(2);
-  const command = args[0];
+  const command = args[0] || "all";
 
   switch (command) {
     case 'all':
