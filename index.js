@@ -33,6 +33,10 @@ class ImageResizerApp {
 
     //   Process images one by one
       for (const obj of imageObjects) {
+        if(key.includes('backup/')) {
+          console.log(`Skipping backup image: ${obj.Key}`);
+          continue;
+        }
         await this.processImage(obj.Key);
         
         // Add a small delay to avoid overwhelming S3
